@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="small-12 medium-6 columns">
+		<p>Already registered?</p>
+		<form ng-submit="login()" novalidate>
+			<input type="text" ng-model="registered.email" placeholder="your avenuecode email">
+			<input type="password" ng-model="registered.password" placeholder="your password">
+			<input type="submit" value="Login" class="button" />
+		</form>
+		
+	</div>
+
+	<div class="small-12 medium-6 columns">
+		<p>not registered yet?</p>
+		<form ng-submit="register()" novalidate>
+			<input type="text" ng-model="user.name" placeholder="your name">
+			<input type="text" ng-model="user.email" placeholder="your avenuecode email">
+			<input type="password" ng-model="user.password" placeholder="your password">
+			<input type="submit" value="Register" class="button" />
+		</form>
+	</div>
+
+</div>

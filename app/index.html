@@ -6,19 +6,56 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>AC University</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">
+  <link rel="stylesheet" href="bower_components/alertify.js/themes/alertify.core.css">
+  <link rel="stylesheet" href="bower_components/alertify.js/themes/alertify.default.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
 </head>
 <body>
-  <ul class="menu">
+  <!-- <ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
-  </ul>
+  </ul> -->
+  <!-- <header class="medium-6 medium-centered columns text-center">
+    <div>
+      <h1>AC Trainings</h1>
+    </div>
+    <ul class="inline-list inline-list small-10 medium-6 small-centered columns text-center">
+      <li><a href="#/view1">home</a></li>
+      <li><a id="myAccount" href="#/view3/">my account</a></li>
+      <li><a id="logout">logout</a></li>
+    </ul>
+    
+  </header> -->
+
+  <header class="contain-to-grid" style="background: crimson;">
+    <nav class="top-bar" data-topbar role="navigation" style="background: crimson;">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#/view1">AC Trainings</a></h1>
+        </li>
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a><span>Menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section" >
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li ><a id="myAccount" href="#/view3/">My Account</a></li>
+          <li ><a id="logout">Logout</a></li>
+        </ul>
+      </section>
+    </nav>
+
+  </header>
+
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -26,18 +63,49 @@
 
   <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
-
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/alertify.js/lib/alertify.min.js"></script>
+  <script src="bower_components/foundation/js/foundation.min.js"></script>
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
+  <script src="view3/view3.js"></script>
+  <script src="login/login.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
+  <script>
+    (function() {
+      var myAccount = document.getElementById('myAccount');
+      if (localStorage.getItem('user')) {
+        myAccount.setAttribute('href',  myAccount.href + JSON.parse(localStorage.getItem('user'))._id);
+      } else {
+        myAccount.style.display = 'none';
+      }
+      
+
+      var logout = document.getElementById('logout');
+      logout.onclick = function() {
+        localStorage.clear();
+        window.location.href = '#/login';
+        window.location.reload();
+      };
+
+      if (localStorage.getItem('user')) {
+        logout.style.visibility = 'visible';
+      } else {
+        logout.style.visibility = 'hidden';
+      }
+
+    })();
+
+    $(document).foundation();
+    
+  </script>
 </body>
 </html>

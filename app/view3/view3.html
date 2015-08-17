@@ -4,16 +4,10 @@
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p> -->
 
-<div class="small-12 text-center columns">
-	<h2>{{course.name}}</h2>
-	<!-- <ul class="no-bullet">
-	<li ng-repeat="host in course.hosts">{{host.name}}</li>
-	</ul> -->
-
-	<p>{{course.description}}</p>
-
-	<div class="row">
-		<div class="small-12 medium-6 columns text-center" ng-repeat="classroom in course.classes">
+<div class="small-12 columns text-center" style="margin-top: 20px;">
+	<p>Your courses... </p>
+	<ul class="no-bullet">
+		<li ng-repeat="classroom in user.classrooms" class="small-12 medium-6 columns text-center">
 			<article class="artee-index-post post tag-other tag-video shuffle-item filtered">
 				<div class="artee-index-post-container">
 					<header class="artee-index-post-header">
@@ -22,18 +16,19 @@
 					</header>
 
 					<section class="artee-index-post-excerpt">
-						<p>{{course.description}}</p>
+						<p>{{classroom.course[0].name}}</p>
 							<div class="artee-index-author">
 								<!-- <img src="/content/images/2014/10/25.jpg" class="artee-index-author-image" alt="Ava Johnson"> --> 
 								<div ng-repeat="host in course.hosts">{{host.name}}</div>
 							</div>
 							<hr>
-							<button ng-click="register(classroom._id)" data="{{classroom._id}}">join</button>
+							<button ng-click="quit(classroom._id)" data="{{classroom._id}}">quit</button>
 					</section>
 				</div>
 			</article>
-		</div>
-	</div>
+		</li>
+	</ul>
 </div>
+
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/app/view2/view2.css">
+<link rel="stylesheet" href="/app/view3/view3.css">
