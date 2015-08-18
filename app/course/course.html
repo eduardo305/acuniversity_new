@@ -14,7 +14,7 @@
 
 	<div class="row">
 		<div class="small-12 medium-6 columns text-center" ng-repeat="classroom in course.classes">
-			<article class="artee-index-post post tag-other tag-video shuffle-item filtered">
+			<article class="artee-index-post post tag-other tag-video shuffle-item filtered" ng-show="classroom.available">
 				<div class="artee-index-post-container">
 					<header class="artee-index-post-header">
 						<div class="artee-index-post-meta"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</time></div>
@@ -22,13 +22,12 @@
 					</header>
 
 					<section class="artee-index-post-excerpt">
-						<p>{{course.description}}</p>
-							<div class="artee-index-author">
-								<!-- <img src="/content/images/2014/10/25.jpg" class="artee-index-author-image" alt="Ava Johnson"> --> 
-								<div ng-repeat="host in course.hosts">{{host.name}}</div>
-							</div>
-							<hr>
-							<button ng-click="register(classroom._id)" data="{{classroom._id}}">join</button>
+						<div class="artee-index-author">
+							<!-- <img src="/content/images/2014/10/25.jpg" class="artee-index-author-image" alt="Ava Johnson"> --> 
+							<div ng-repeat="host in course.hosts">{{host.name}}</div>
+						</div>
+						<hr>
+						<button ng-click="register(classroom._id)" data="{{classroom._id}}">join</button>
 					</section>
 				</div>
 			</article>
