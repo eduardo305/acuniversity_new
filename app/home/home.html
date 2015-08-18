@@ -20,7 +20,7 @@
 		        <div class="small-12 medium-9 large-10 columns">
 		            <header class="summer-post-header">
 		                <h3 class="summer-post-title">
-		                    <a href="#/view2/{{course._id}}">
+		                    <a href="#/course/{{course._id}}">
 		                        {{course.name}}
 		                    </a>
 		                </h3>
@@ -32,7 +32,7 @@
 		                <!-- <img class="summer-index-post-author-thumb" src="/content/images/2014/10/25.jpg" alt="Author image"> -->
 		                <a>by <span ng-repeat="host in course.hosts">{{host.name}}{{$last ? '' : ' and '}}</span></a>  
 		            </div>
-		            <a href="#/view2/{{course._id}}" class="summer-post-read-more">Read more</a>
+		            <a href="#/course/{{course._id}}" class="summer-post-read-more">Read more</a>
 		        </div>
 		    </article>
 
@@ -40,4 +40,4 @@
 	</div>
 </div>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/app/view1/view1.css">
+<link rel="stylesheet" href="/app/home/home.css">

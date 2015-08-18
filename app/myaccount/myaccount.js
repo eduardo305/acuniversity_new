@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.view3', ['ngRoute'])
+angular.module('myApp.myaccount', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view3/:userid', {
-  	templateUrl: 'view3/view3.html',
-  	controller: 'View3Ctrl'
+  $routeProvider.when('/myaccount/:userid', {
+  	templateUrl: 'app/myaccount/myaccount.html',
+  	controller: 'MyAccountCtrl'
   });
 }])
 
-.controller('View3Ctrl', ['$scope', '$routeParams', '$http', 'apidomain', function($scope, $routeParams, $http, apidomain) {
+.controller('MyAccountCtrl', ['$scope', '$routeParams', '$http', 'apidomain', function($scope, $routeParams, $http, apidomain) {
 
   $http({
     method: 'GET',

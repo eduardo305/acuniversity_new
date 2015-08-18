@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.course', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view2/:courseid', {
-  	templateUrl: 'view2/view2.html',
-  	controller: 'View2Ctrl'
+  $routeProvider.when('/course/:courseid', {
+  	templateUrl: 'app/course/course.html',
+  	controller: 'CourseCtrl'
   });
 }])
 
-.controller('View2Ctrl', ['$scope', '$routeParams', '$http', 'apidomain', function($scope, $routeParams, $http, apidomain) {
+.controller('CourseCtrl', ['$scope', '$routeParams', '$http', 'apidomain', function($scope, $routeParams, $http, apidomain) {
 
   $http({
     method: 'GET',
