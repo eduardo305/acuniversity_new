@@ -55,7 +55,7 @@ angular.module('myApp.course', ['ngRoute'])
           });
 
         } else {
-          alertify.alert('This is class is already full');
+          alertify.alert('This classroom is already full');
         }
     }).error(function(data) {
       console.log('Error: ' + data);
@@ -70,7 +70,13 @@ angular.module('myApp.course', ['ngRoute'])
       headers: {'x-access-token': window.localStorage.getItem('token')}
 
     }).success(function(data) {
-
+      console.log(data);
+      $('#participantsModal').foundation('reveal', 'open');
+      var ul = $('ul#participantsList');
+      $('ul#participantsList li').remove();
+      for (var i = 0; i < data.length; i++) {
+        ul.append('<li>' + data[i].name + '</li>');
+      }
     }).error(function(data) {
 
     });

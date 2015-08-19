@@ -28,11 +28,19 @@
 						</div>
 						<hr>
 						<button ng-click="register(classroom._id)" data="{{classroom._id}}">join</button>
+						<button ng-click="getParticipants(classroom._id)" data="{{classroom._id}}" data-reveal-id="myModal">participants</button>
 					</section>
 				</div>
 			</article>
 		</div>
 	</div>
+</div>
+
+<div id="participantsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Participant names</h2>
+  
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  <ul id="participantsList"></ul>
 </div>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/app/course/course.css">
