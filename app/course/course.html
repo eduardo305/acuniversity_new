@@ -20,7 +20,8 @@
 						<div class="artee-index-post-meta"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</time></div>
 						<h3 class="artee-index-post-title">{{classroom.name}}</h3>
 					</header>
-
+					<span class="label alert" ng-show="{{classroom.isFull}}">no more spots</span>
+	
 					<section class="artee-index-post-excerpt">
 						<div class="artee-index-author">
 							<!-- <img src="/content/images/2014/10/25.jpg" class="artee-index-author-image" alt="Ava Johnson"> --> 

@@ -3,17 +3,18 @@
 	<ul id="course-list" class="no-bullet" style="padding-left: 0;
     list-style-type: none;">
 		<li class="course-item" ng-repeat="course in courses">
-			<article class="animated-post summer-index-post post row fadeInDown" ng-show="course.available">
+			<article class="animated-post summer-index-post post row fadeInDown" ng-show="course.available" >
 		        <div class="small-12 medium-3 large-2 columns datetime">
 		            <span class="summer-post-meta">
 		                <time datetime="2014-10-18">
-		                	<!-- <span ng-if="course.classes.length > 1"><i class="fa fa-flag"></i>Classroom 1</span> -->
+		                	
 		                    <span class="day">
 		                        {{course.classes[0].startdate | date: 'd'}}
 		                    </span>
 		                    <span class="month-year">
 		                        {{course.classes[0].startdate | date: 'MMM yyyy'}}
 		                    </span>
+		                    <span class="label alert" ng-show="{{course.isFull}}">no more spots</span>
 		                </time>
 		            </span>
 		        </div>

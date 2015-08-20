@@ -23,6 +23,8 @@ angular.module('myApp.myaccount', ['ngRoute'])
 
   $scope.quit = function(classroomsid) {
 
+    $scope.currentClass = classroomsid;
+
     $http({
       method: 'PUT',
       url: apidomain + 'api/quit/' + JSON.parse(localStorage.getItem('user'))._id,
@@ -30,9 +32,23 @@ angular.module('myApp.myaccount', ['ngRoute'])
       headers: {'x-access-token': window.localStorage.getItem('token')},
     }).success(function(data) {
        $scope.user = data.user;
+       $scope.setClassroomAvailability($scope.currentClass);
        alertify.success('See you in the next course', 1000);
     }).error(function(data) {
       console.log('Error: ' + data);
+    });
+  };
+
+  $scope.setClassroomAvailability = function(currentClass) {
+    $http({
+      method: 'PUT',
+      url: apidomain + 'api/classrooms/availability/' + currentClass,
+      data: {'isFull' : false },
+      headers: {'x-access-token': window.localStorage.getItem('token')},
+    }).success(function(data) {
+      console.log(data);
+    }).error(function(data) {
+      console.log(data);
     });
   };
 

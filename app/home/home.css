@@ -86,3 +86,7 @@
     width: 60%;
     border-radius: 0.125rem;
 }
+
+.label {
+    font-size: 15px;
+}

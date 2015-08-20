@@ -28,17 +28,18 @@ angular.module('myApp.course', ['ngRoute'])
   $scope.register = function(classroomsid) {
 
     $scope.currentClass = classroomsid;
+    $scope.currentClassParticipantNumber = 0;
 
     $http({
       method: 'GET',
       url: apidomain + 'api/students/' + classroomsid,
       headers: {'x-access-token': window.localStorage.getItem('token')},
     }).success(function(data) {
-        var classLimit = $scope.course.classes.filter(function(obj) { 
-          return obj._id === $scope.currentClass
-        });
+        var classroom = $scope.findClassroom($scope.currentClass);
 
-        if (data.length < classLimit[0].limit) {
+        $scope.currentClassParticipantNumber = data.length;
+
+        if (data.length < classroom[0].limit) {
           $http({
             method: 'PUT',
             url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('user'))._id,
@@ -46,7 +47,15 @@ angular.module('myApp.course', ['ngRoute'])
             headers: {'x-access-token': window.localStorage.getItem('token')},
           }).success(function(data) {
              if (data.success) {
-                alertify.success('You are now registered', 1000);
+
+              $scope.currentClassParticipantNumber++;
+
+              if ($scope.isFull($scope.currentClass)) {
+                $scope.setClassroomAvailability($scope.currentClass);
+              }
+
+
+              alertify.success('You are now registered', 1000);
              } else {
                 alertify.error(data.message, 3000);
              }
@@ -62,6 +71,37 @@ angular.module('myApp.course', ['ngRoute'])
     });
 
   };
+
+  $scope.setClassroomAvailability = function(currentClass) {
+    $http({
+      method: 'PUT',
+      url: apidomain + 'api/classrooms/availability/' + currentClass,
+      data: {'isFull' : true },
+      headers: {'x-access-token': window.localStorage.getItem('token')},
+    }).success(function(data) {
+      console.log(data);
+    }).error(function(data) {
+
+    });
+  };
+
+  $scope.isFull = function(currentClass) {
+    var classroom = $scope.findClassroom(currentClass),
+      isFull = false;
+
+    if (classroom && classroom[0].limit === $scope.currentClassParticipantNumber) {
+      isFull = true;
+    }
+
+    return isFull;
+  };
+
+  $scope.findClassroom = function(currentClass) {
+    return $scope.course.classes.filter(function(obj) { 
+      return obj._id === $scope.currentClass;
+    });
+  };
+
 
   $scope.getParticipants = function(classroomsid) {
     $http({
