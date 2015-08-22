@@ -1,0 +1,92 @@
+.summer-index-post {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.0625rem solid #d9d9d9;
+}
+
+.summer-index-post .summer-post-meta {
+    display: block;
+    text-align: center;
+}
+
+.summer-index-post .summer-post-meta .day {
+    display: block;
+    font-size: 3.25rem;
+    font-weight: 800;
+    color: #e51843;
+    font-family: "Montserrat", sans-serif;
+}
+
+.summer-index-post .summer-post-meta .month-year {
+    display: block;
+    font-size: 1rem;
+    color: #000;
+    font-size: 0.875rem;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+}
+
+.summer-index-post .datetime {
+    margin-bottom: 2.5rem;
+}
+
+
+.summer-index-post .summer-post-header .summer-post-title {
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1.1;
+}
+
+.summer-index-post .summer-post-header .summer-post-title a {
+    color: #000;
+}
+
+.summer-index-post .summer-post-excerpt {
+    color: #000;
+    font-size: 1.25rem;
+    margin-top: 0.625rem;
+    text-align: center;
+}
+
+.summer-index-post .summer-index-post-author {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    text-align: center;
+    color: #666666;
+    font-size: 0.875rem;
+    line-height: 2.125rem;
+}
+
+.summer-index-post .summer-index-post-author a {
+    color: #666666;
+    -webkit-transition: color .3s;
+    transition: color .3s;
+}
+
+.summer-index-post .summer-post-read-more {
+    display: block;
+    text-align: center;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5625rem;
+    font-size: 0.8125rem;
+    color: #ffffff;
+    background-color: #000;
+    font-weight: 600;
+    padding: 0.625rem 2.5rem;
+    text-transform: uppercase;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    width: 60%;
+    border-radius: 0.125rem;
+}
+
+.label {
+    font-size: 15px;
+}

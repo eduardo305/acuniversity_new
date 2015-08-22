@@ -7,6 +7,7 @@ angular.module('myApp', [
   'myApp.course',
   'myApp.myaccount',
   'myApp.login',
+  //'myApp.module',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {

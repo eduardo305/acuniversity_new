@@ -9,20 +9,84 @@ angular.module('myApp.course', ['ngRoute'])
   });
 }])
 
-.controller('CourseCtrl', ['$scope', '$routeParams', '$http', 'apidomain', function($scope, $routeParams, $http, apidomain) {
+.service('CourseService', ['$http', 'apidomain', function($http, apidomain) {
 
-  $http({
-    method: 'GET',
-    url: apidomain + 'api/courses/' + $routeParams.courseid,
-    headers: {'x-access-token': window.localStorage.getItem('token')},
-  }).success(function(data) {
-    if (data.success) {
-      $scope.course = data.course[0];
-    } else {
-      window.location.href = '#/login';
-    }
-  }).error(function(data) {
-    console.log('Error: ' + data);
+  this.list = function() {
+    return $http({
+      method: 'GET',
+      url: apidomain + 'api/courses',
+      headers: {'x-access-token': window.localStorage.getItem('token')},
+    }).success(function(data) {
+      if (data.success) {
+        return data.courses;
+      } else {
+        window.location.href = '#/login';
+      }
+    }).error(function(data) {
+      console.log('Error: ' + data);
+    });
+  };
+
+  this.getCourse = function(courseid) {
+    return $http({
+      method: 'GET',
+      url: apidomain + 'api/courses/' + courseid,
+      headers: {'x-access-token': window.localStorage.getItem('token')},
+    }).success(function(data) {
+      if (!data.success) {
+        window.location.href = '#/login';
+      }
+    }).error(function(data) {
+      console.log('Error: ' + data);
+    });
+  };
+
+  this.getClassroomStudents = function(classroomsid) {
+
+    return $http({
+      method: 'GET',
+      url: apidomain + 'api/students/' + classroomsid,
+      headers: {'x-access-token': window.localStorage.getItem('token')},
+    }).success(function(data) {
+      //return data;
+    }).error(function(data) {
+      console.log('Error: ' + data);
+    });
+  };
+
+  this.register = function(classroomsid) {
+
+    return $http({
+      method: 'PUT',
+      url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('user'))._id,
+      data: {'classrooms': classroomsid},
+      headers: {'x-access-token': window.localStorage.getItem('token')},
+    }).success(function(data) {
+       
+    }).error(function(data) {
+      console.log('Error: ' + data);
+    });
+  };
+
+  this.setClassroomAvailability = function(classroomsid, isFull) {
+    return $http({
+      method: 'PUT',
+      url: apidomain + 'api/classrooms/availability/' + classroomsid,
+      data: { 'isFull' : isFull },
+      headers: {'x-access-token': window.localStorage.getItem('token')},
+    }).success(function(data) {
+      
+    }).error(function(data) {
+      console.log('Error: ' + data);
+    });
+  };
+  
+}])
+
+.controller('CourseCtrl', ['$scope', '$routeParams', '$http', 'apidomain', 'CourseService', function($scope, $routeParams, $http, apidomain, CourseService) {
+
+  CourseService.getCourse($routeParams.courseid).then(function(response) {
+    $scope.course = response.data.course[0];
   });
 
   $scope.register = function(classroomsid) {
@@ -30,58 +94,35 @@ angular.module('myApp.course', ['ngRoute'])
     $scope.currentClass = classroomsid;
     $scope.currentClassParticipantNumber = 0;
 
-    $http({
-      method: 'GET',
-      url: apidomain + 'api/students/' + classroomsid,
-      headers: {'x-access-token': window.localStorage.getItem('token')},
-    }).success(function(data) {
-        var classroom = $scope.findClassroom($scope.currentClass);
+    CourseService.getClassroomStudents(classroomsid).then(function(response) {
+      $scope.participantNumber = response.data ? response.data.length : 0;
 
-        $scope.currentClassParticipantNumber = data.length;
+      var classroom = $scope.findClassroom(classroomsid);
 
-        if (data.length < classroom[0].limit) {
-          $http({
-            method: 'PUT',
-            url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('user'))._id,
-            data: {'classrooms': $scope.currentClass },
-            headers: {'x-access-token': window.localStorage.getItem('token')},
-          }).success(function(data) {
-             if (data.success) {
+      if ($scope.participantNumber < classroom[0].limit) {
+        CourseService.register(classroomsid).then(function(response) {
+          if (response.data.success) {
+            $scope.participantNumber++;
 
-              $scope.currentClassParticipantNumber++;
+            if ($scope.isFull(classroomsid)) {
+              $scope.setClassroomAvailability(classroomsid);
+            }
 
-              if ($scope.isFull($scope.currentClass)) {
-                $scope.setClassroomAvailability($scope.currentClass);
-              }
-
-
-              alertify.success('You are now registered', 1000);
-             } else {
-                alertify.error(data.message, 3000);
-             }
-          }).error(function(data) {
-            console.log('Error: ' + data);
-          });
-
-        } else {
-          alertify.alert('This classroom is already full');
-        }
-    }).error(function(data) {
-      console.log('Error: ' + data);
+            alertify.success('You are now registered', 1000);
+          } else {
+            alertify.error(response.data.message, 3000);
+          }
+          
+        });
+      } else {
+        alertify.alert('This classroom is already full');
+      }
     });
-
   };
 
-  $scope.setClassroomAvailability = function(currentClass) {
-    $http({
-      method: 'PUT',
-      url: apidomain + 'api/classrooms/availability/' + currentClass,
-      data: {'isFull' : true },
-      headers: {'x-access-token': window.localStorage.getItem('token')},
-    }).success(function(data) {
-      console.log(data);
-    }).error(function(data) {
-
+  $scope.setClassroomAvailability = function(classroomsid) {
+    CourseService.setClassroomAvailability(classroomsid, $scope.participantNumber ===  $scope.findClassroom(classroomsid)[0].limit).then(function(response) {
+      console.log('Classroom ' + classroomsid + ' status was set');
     });
   };
 
@@ -89,7 +130,7 @@ angular.module('myApp.course', ['ngRoute'])
     var classroom = $scope.findClassroom(currentClass),
       isFull = false;
 
-    if (classroom && classroom[0].limit === $scope.currentClassParticipantNumber) {
+    if (classroom && classroom[0].limit === $scope.participantNumber) {
       isFull = true;
     }
 
@@ -102,23 +143,16 @@ angular.module('myApp.course', ['ngRoute'])
     });
   };
 
-
   $scope.getParticipants = function(classroomsid) {
-    $http({
-      method: 'GET',
-      url: apidomain + 'api/students/' + classroomsid,
-      headers: {'x-access-token': window.localStorage.getItem('token')}
 
-    }).success(function(data) {
-      console.log(data);
+    CourseService.getClassroomStudents(classroomsid).then(function(response) {
       $('#participantsModal').foundation('reveal', 'open');
       var ul = $('ul#participantsList');
       $('ul#participantsList li').remove();
-      for (var i = 0; i < data.length; i++) {
-        ul.append('<li>' + data[i].name + '</li>');
-      }
-    }).error(function(data) {
 
+      $.each(response.data, function(index, user) {
+        ul.append('<li>' + user.name + '</li>');
+      });
     });
   };
 
