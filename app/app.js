@@ -7,9 +7,11 @@ angular.module('myApp', [
   'myApp.course',
   'myApp.myaccount',
   'myApp.login',
+  'myApp.comment',
   //'myApp.module',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
 }]).constant('apidomain', 'http://162.243.153.161/');
+

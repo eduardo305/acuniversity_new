@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h3>{{comments.length}} Comments</h3>
+		<form ng-submit="addComment()" novalidate>
+			<textarea ng-model="comment.text" placeholder="write your comment here"></textarea>
+			<input type="submit" value="Submit" class="button" />
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 columns">
+		<ul>
+			<li ng-repeat="comment in comments">
+				<div class="artee-index-post-meta">
+					<i class="fa fa-calendar"></i> 
+					<time datetime="2014-10-18">{{comment.date | date: 'medium'}} </time>
+				</div>
+				<p>{{comment.comment}}</p>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<link rel="stylesheet" href="/app/login/login.css">
