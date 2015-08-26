@@ -10,15 +10,27 @@ angular.module('myApp.myaccount', ['ngRoute'])
 }])
 
 .controller('MyAccountCtrl', ['$scope', '$routeParams', '$http', 'apidomain', function($scope, $routeParams, $http, apidomain) {
-
+  // Initialize collapse button
   $http({
     method: 'GET',
     url: apidomain + 'api/users/' + $routeParams.userid,
     headers: {'x-access-token': window.localStorage.getItem('token')},
   }).success(function(data) {
-     $scope.user = data[0];
+    $scope.user = data[0];
+
+    // Hide sideNav
+    $('.button-collapse').sideNav('hide');
+    $('.progress').toggleClass('hide');
+
+    setTimeout(function() {
+      $('.collapsible').collapsible({
+        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+      });
+    }, 500);
+    
   }).error(function(data) {
     console.log('Error: ' + data);
+    $('.progress').toggleClass('hide');
   });
 
   $scope.quit = function(classroomsid) {
@@ -33,6 +45,11 @@ angular.module('myApp.myaccount', ['ngRoute'])
     }).success(function(data) {
        $scope.user = data.user;
        $scope.setClassroomAvailability($scope.currentClass);
+       setTimeout(function() {
+          $('.collapsible').collapsible({
+            accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+          });
+       }, 500);
        alertify.success('See you in the next course', 1000);
     }).error(function(data) {
       console.log('Error: ' + data);

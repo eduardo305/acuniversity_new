@@ -3,32 +3,40 @@
   Showing of 'interpolate' filter:
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p> -->
+<div class="container">
 
-<div class="small-12 columns text-center" style="margin-top: 20px;">
-	<p>Your courses... </p>
-	<ul class="no-bullet">
-		<li ng-repeat="classroom in user.classrooms" class="small-12 medium-6 columns text-center">
-			<article class="artee-index-post post tag-other tag-video shuffle-item filtered">
-				<div class="artee-index-post-container">
-					<header class="artee-index-post-header">
-						<div class="artee-index-post-meta"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</time></div>
-						<h3 class="artee-index-post-title">{{classroom.name}}</h3>
-					</header>
+	<div class="progress">
+      <div class="indeterminate"></div>
+  	</div>
 
-					<section class="artee-index-post-excerpt">
-						<p>{{classroom.course[0].name}}</p>
-							<div class="artee-index-author">
-								<!-- <img src="/content/images/2014/10/25.jpg" class="artee-index-author-image" alt="Ava Johnson"> --> 
-								<div ng-repeat="host in course.hosts">{{host.name}}</div>
-							</div>
-							<hr>
-							<button ng-click="quit(classroom._id)" data="{{classroom._id}}">quit</button>
-					</section>
-				</div>
-			</article>
-		</li>
-	</ul>
+    <!-- <div class="card light-blue">
+      <div class="card-content white-text">
+        <span class="card-title">{{user.name}}</span>
+        <p>{{user.email}}</p>
+      </div>                  
+    </div> -->
+    <p><h5>My courses</h5></p>
+
+	<p ng-hide="user.classrooms.length">You are not subscribed to any course at the moment... </p>
+
+    <ul class="collapsible" data-collapsible="accordion" ng-show="user.classrooms.length">
+        <li ng-repeat="classroom in user.classrooms"> 
+            <div class="collapsible-header"><i class="material-icons">info_outline</i>{{classroom.course[0].name}}</div>
+            <div class="collapsible-body">
+            	<div class="row">
+            		<div class="courseinfo">
+            			<span><i class="tiny mdi-action-class"></i>
+            			Classroom: {{classroom.name}}</span>
+            			<div><i class="tiny mdi-action-event"></i>
+            			{{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</div>
+            		</div>
+
+            		<div><a class="waves-effect waves-light btn" ng-click="quit(classroom._id)" data="{{classroom._id}}">quit</a></div>
+            		
+            	</div>
+            </div>
+        </li>
+    </ul>
 </div>
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/app/myaccount/myaccount.css">

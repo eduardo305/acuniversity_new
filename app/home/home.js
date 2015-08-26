@@ -13,6 +13,7 @@ angular.module('myApp.home', ['ngRoute'])
 
   CourseService.list().then(function(response) {
     $scope.courses = response.data.courses;
+    $('.button-collapse').sideNav('hide');
   });
 
   $scope.checkCourseStatus = function(course) {
@@ -27,6 +28,61 @@ angular.module('myApp.home', ['ngRoute'])
 
     course.isFull = full;
   };
+
+  var homenav = (function() {
+    var self = {};
+
+    self.init = function() {
+      self.setMyAccountMenu();
+      self.setLogoutMenu();
+    };
+
+    self.setMyAccountMenu = function() {
+      var myAccount = document.getElementsByClassName('myAccount'),
+        user = localStorage.getItem('user');
+
+      if (user) {
+        $.each(myAccount, function(index, account) {
+          if (account.getAttribute('href').endsWith('myaccount/')) {
+            account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('user'))._id);
+            account.style.display = 'block';
+          }
+        });
+      } else {
+        $.each(myAccount, function(index, account) {
+          account.style.display = 'none';
+        });
+        
+      }
+    };
+
+    self.setLoginMenu = function() {
+
+    };
+
+    self.setLogoutMenu = function() {
+      var logout = document.getElementsByClassName('logout');
+
+      $.each(logout, function(index, logout) {
+        logout.onclick = function() {
+          localStorage.clear();
+          window.location.href = '#/login';
+          window.location.reload();
+        };
+
+        if (localStorage.getItem('user')) {
+          logout.style.visibility = 'visible';
+        } else {
+          logout.style.visibility = 'hidden';
+        }
+      });
+    };
+
+    return self;
+
+  })();
+
+  homenav.init();
 
 
 }]);

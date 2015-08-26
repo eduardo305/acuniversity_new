@@ -28,3 +28,45 @@
   content: "";
   padding: 0;
 }
+
+#alertify nav {
+  background-color: white;
+  box-shadow: none;
+}
+
+.nav-wrapper {
+
+}
+
+.nav-wrapper ul li a {
+  /*color:  black;*/
+}
+
+nav a {
+  margin-left: 10px;
+}
+
+.nav-wrapper a.brand-logo {
+  /*color: black;*/
+  margin-left: 10px;
+}
+
+
+.nav-wrapper a.mobile-demo i {
+  line-height: 40px;
+  font-size: 2.4rem;
+}
+
+.nav-wrapper a.button-collapse {
+  /*color: black;*/
+  margin-left: 8px;
+  height: 39px;
+  top: 10px;
+}
+
+.nav-wrapper a.button-collapse i {
+  font-size: 2.4rem;
+  height: 52px;
+  line-height: 39px;
+}
+

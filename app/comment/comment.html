@@ -1,25 +1,43 @@
 <div class="row">
-	<div class="small-12 columns">
-		<h3>{{comments.length}} Comments</h3>
-		<form ng-submit="addComment()" novalidate>
-			<textarea ng-model="comment.text" placeholder="write your comment here"></textarea>
-			<input type="submit" value="Submit" class="button" />
-		</form>
-	</div>
+	<form class="col s12" ng-submit="addComment()">
+		<h4>{{comments.length}} Comments</h4>
+		<div class="row">
+		  <div class="input-field col s12">
+		  	
+		    <textarea id="commentarea" class="materialize-textarea" length="120" ng-model="comment.text" placeholder="write your comment here"></textarea>
+		    <!-- <label for="commentarea">Comment</label> -->
+		    <!-- <input type="submit" value="Submit" class="button" /> -->
+		    <button class="btn waves-effect waves-light black" type="submit" name="action">Submit</button>
+		  </div>
+		</div>
+	</form>
 </div>
 
-<div class="row">
-	<div class="small-12 columns">
-		<ul>
-			<li ng-repeat="comment in comments">
-				<div class="artee-index-post-meta">
-					<i class="fa fa-calendar"></i> 
-					<time datetime="2014-10-18">{{comment.date | date: 'medium'}} </time>
-				</div>
-				<p>{{comment.comment}}</p>
-			</li>
-		</ul>
+<!-- <div class="preloader-wrapper small active center-align">
+	<div class="spinner-layer spinner-red-only">
+	  <div class="circle-clipper left">
+	    <div class="circle"></div>
+	  </div><div class="gap-patch">
+	    <div class="circle"></div>
+	  </div><div class="circle-clipper right">
+	    <div class="circle"></div>
+	  </div>
 	</div>
+</div> -->
+<div class="progress">
+	<div class="indeterminate"></div>
 </div>
 
-<link rel="stylesheet" href="/app/login/login.css">
+<ul class="collection comments">
+    <li class="collection-item avatar" ng-repeat="comment in comments">
+      <!-- <img src="images/yuna.jpg" alt="" class="circle"> -->
+      <i class="material-icons circle red">assignment_ind</i>
+      <!-- <span class="title">Title</span> -->
+      <p class="grey-text"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{comment.date | date: 'medium'}} </time> <br>
+         <p>{{comment.comment}}</p>
+      </p>
+      <!-- <a href="" class="secondary-content"><i class="material-icons">grade</i></a> -->
+    </li>
+</ul>
+
+<!-- <link rel="stylesheet" href="/app/comment/comment.css"> -->

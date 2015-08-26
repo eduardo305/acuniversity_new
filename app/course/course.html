@@ -4,46 +4,48 @@
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p> -->
 
-<div class="small-12 text-center columns">
-	<h2>{{course.name}}</h2>
-	<!-- <ul class="no-bullet">
-	<li ng-repeat="host in course.hosts">{{host.name}}</li>
-	</ul> -->
-
-	<p>{{course.description}}</p>
+<div class="container">
 
 	<div class="row">
-		<div class="small-12 medium-6 columns text-center" ng-repeat="classroom in course.classes">
-			<article class="artee-index-post post tag-other tag-video shuffle-item filtered" ng-show="classroom.available">
-				<div class="artee-index-post-container">
-					<header class="artee-index-post-header">
-						<div class="artee-index-post-meta"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</time></div>
-						<h3 class="artee-index-post-title">{{classroom.name}}</h3>
-					</header>
-					<span class="label alert" ng-show="{{classroom.isFull}}">no more spots</span>
-	
-					<section class="artee-index-post-excerpt">
-						<div class="artee-index-author">
-							<!-- <img src="/content/images/2014/10/25.jpg" class="artee-index-author-image" alt="Ava Johnson"> --> 
-							<div ng-repeat="host in course.hosts">{{host.name}}</div>
-						</div>
-						<hr>
-						<button ng-click="register(classroom._id)" data="{{classroom._id}}">join</button>
-						<button ng-click="getParticipants(classroom._id)" data="{{classroom._id}}" data-reveal-id="myModal">participants</button>
-					</section>
-				</div>
-			</article>
+		<div class="col s12 m6">
+			<h2>{{course.name}}</h2>
+
+	<p>{{course.description}}</p>
 		</div>
+		<div class="col s12 m6" style="margin-top: 20px;">
+		    <div class="col s12" ng-repeat="classroom in course.classes">
+		      <div class="card">
+		        <div class="card-content">
+		          <span class="badge" ng-show="{{classroom.isFull}}">
+		        	<i class="material-icons circle red">not_interested</i>
+		        	<div>no more spots</div>
+		          </span>
+		          <div class="grey-text"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</time></div>
+		          <span class="card-title grey-text text-darken-4">{{classroom.name}}</span>
+		          <div ng-repeat="host in course.hosts">{{host.name}}</div>
+		        </div>
+		        <div class="card-action">
+		          <a ng-click="register(classroom._id)" data="{{classroom._id}}">join</a>
+		          <a ng-click="getParticipants(classroom._id)" data="{{classroom._id}}" class="waves-effect waves-light modal-trigger">participants</a>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+	</div>
+
+	<div ng-include="'app/comment/comment.html'" ng-controller="CommentCtrl"></div>
+</div>
+
+<!-- Modal Structure -->
+<div id="participantsModal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+	  <h4>Participant names</h4>
+	  <ul id="participantsList"></ul>
+	</div>
+	<div class="modal-footer">
+	  <a class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
 	</div>
 </div>
 
-<div ng-include="'app/comment/comment.html'" ng-controller="CommentCtrl"></div>
-
-<div id="participantsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Participant names</h2>
-  
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-  <ul id="participantsList"></ul>
-</div>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/app/course/course.css">

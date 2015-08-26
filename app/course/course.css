@@ -46,3 +46,10 @@ button {
 	background: #e51843;
 	line-height: 1.1;
 }
+
+.card-content span.badge i {
+    color: white;
+    padding: 10px;
+}
+
+    

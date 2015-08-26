@@ -46,3 +46,13 @@ button {
 	background: black;
 	line-height: 1.1;
 }
+
+.collapsible-body {
+    margin-left: 28px;
+    margin-right: 28px;
+}
+
+.collapsible-body .courseinfo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

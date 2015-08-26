@@ -41,15 +41,25 @@ angular.module('myApp.comment', ['ngRoute'])
 .controller('CommentCtrl', ['$scope', '$routeParams', '$http', 'apidomain', 'CommentService', function($scope, $routeParams, $http, apidomain, CommentService) {
 
   CommentService.getCommentsByCourse($routeParams.courseid).then(function(response) {
+    $('.progress').toggleClass('hide');
     $scope.comments = response.data;
+    $('textarea#commentarea').characterCounter();
   });
 
   $scope.addComment = function() {
     if ($('textarea').val()) {
-      CommentService.addComment($('textarea').val(), $routeParams.courseid).then(function(response) {
-        $scope.comments.unshift(response.data.comment);
+      if ($('textarea').val().length <= 12) {
+        $('.progress').toggleClass('hide');
+        CommentService.addComment($('textarea').val(), $routeParams.courseid).then(function(response) {
+          $('.progress').toggleClass('hide');
+          $scope.comments.unshift(response.data.comment);
+          $('textarea').val('');
+        });
+      } else {
         $('textarea').val('');
-      });
+        $('textarea').focus();
+        alertify.alert('Your comment is too big, dude!');
+      }
     } else {
       alertify.alert('Please enter a comment');
     }

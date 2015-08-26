@@ -20,6 +20,7 @@ angular.module('myApp.course', ['ngRoute'])
       if (data.success) {
         return data.courses;
       } else {
+        alertify.alert('You need to login first...');
         window.location.href = '#/login';
       }
     }).error(function(data) {
@@ -146,7 +147,7 @@ angular.module('myApp.course', ['ngRoute'])
   $scope.getParticipants = function(classroomsid) {
 
     CourseService.getClassroomStudents(classroomsid).then(function(response) {
-      $('#participantsModal').foundation('reveal', 'open');
+      $('#participantsModal').openModal();
       var ul = $('ul#participantsList');
       $('ul#participantsList li').remove();
 
