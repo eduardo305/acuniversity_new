@@ -48,7 +48,7 @@ angular.module('myApp.comment', ['ngRoute'])
 
   $scope.addComment = function() {
     if ($('textarea').val()) {
-      if ($('textarea').val().length <= 12) {
+      if ($('textarea').val().length <= 360) {
         $('.progress').toggleClass('hide');
         CommentService.addComment($('textarea').val(), $routeParams.courseid).then(function(response) {
           $('.progress').toggleClass('hide');
