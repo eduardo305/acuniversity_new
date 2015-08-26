@@ -11,9 +11,17 @@ var nav = (function() {
             user = localStorage.getItem('user');
 
         if (user) {
+            if (typeof String.prototype.endsWith !== 'function') {
+                String.prototype.endsWith = function(suffix) {
+                    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+                };
+            }
+
             $.each(myAccount, function(index, account) {
-                account.setAttribute('href', account.href + JSON.parse(localStorage.getItem('user'))._id);
+              if (account.getAttribute('href').endsWith('myaccount/')) {
+                account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('user'))._id);
                 account.style.display = 'block';
+              }
             });
         } else {
             $.each(myAccount, function(index, account) {

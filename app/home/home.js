@@ -42,6 +42,13 @@ angular.module('myApp.home', ['ngRoute'])
         user = localStorage.getItem('user');
 
       if (user) {
+
+        if (typeof String.prototype.endsWith !== 'function') {
+            String.prototype.endsWith = function(suffix) {
+                return this.indexOf(suffix, this.length - suffix.length) !== -1;
+            };
+        }
+
         $.each(myAccount, function(index, account) {
           if (account.getAttribute('href').endsWith('myaccount/')) {
             account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('user'))._id);
