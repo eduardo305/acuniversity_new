@@ -20,7 +20,6 @@ angular.module('myApp.course', ['ngRoute'])
       if (data.success) {
         return data.courses;
       } else {
-        alertify.alert('You need to login first...');
         window.location.href = '#/login';
       }
     }).error(function(data) {
