@@ -10,7 +10,19 @@
 		<div class="col s12 m6">
 			<h2>{{course.name}}</h2>
 
-	<p>{{course.description}}</p>
+			<p>{{course.description}}</p>
+			
+			<div ng-show="course.content.length">
+				<p>
+					<h5>Content</h5>
+					<ul class="collection">
+						<li class="collection-item" ng-repeat="content in course.content">
+							<div><b>{{content.title}}</b></div>
+							<div>{{content.description}}</div>
+						</li>
+					</ul>
+				</p>
+			</div>
 		</div>
 		<div class="col s12 m6" style="margin-top: 20px;">
 		    <div class="col s12" ng-repeat="classroom in course.classes">
