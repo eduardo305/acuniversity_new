@@ -13,5 +13,5 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
-//}]).constant('apidomain', 'http://162.243.153.161/');
-}]).constant('apidomain', 'http://127.0.0.1:1234/');
+}]).constant('apidomain', 'http://162.243.153.161/');
+//}]).constant('apidomain', 'http://127.0.0.1:1234/');
