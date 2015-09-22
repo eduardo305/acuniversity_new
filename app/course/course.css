@@ -52,4 +52,8 @@ button {
     padding: 10px;
 }
 
+.card-content .location {
+    max-width: 210px;
+}
+
     

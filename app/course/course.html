@@ -32,7 +32,9 @@
 		        	<i class="material-icons circle red">not_interested</i>
 		        	<div>no more spots</div>
 		          </span>
-		          <div class="grey-text"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</time></div>
+		          <div class="grey-text"><i class="fa fa-calendar"></i> <time> {{classroom.startdate | date: 'MMM d'}} - {{classroom.enddate | date: 'MMM d'}}</time></div>
+		          <div class="grey-text"><i class="tiny material-icons">schedule</i><time> {{classroom.startdate | date: 'shortTime'}} - {{classroom.enddate | date: 'shortTime'}} </time></i></div>
+		          <div class="grey-text location"><i class="tiny material-icons">location_on</i> 453 Cristovao Colombo Avenue - suite 203</div>
 		          <span class="card-title grey-text text-darken-4">{{classroom.name}}</span>
 		          <div ng-repeat="host in course.hosts">{{host.name}}</div>
 		        </div>
