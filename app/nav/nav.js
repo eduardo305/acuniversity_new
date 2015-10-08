@@ -8,7 +8,7 @@ var nav = (function() {
 
     self.setMyAccountMenu = function() {
         var myAccount = document.getElementsByClassName('myAccount'),
-            user = localStorage.getItem('user');
+            user = localStorage.getItem('uniuser');
 
         if (user) {
             if (typeof String.prototype.endsWith !== 'function') {
@@ -19,7 +19,7 @@ var nav = (function() {
 
             $.each(myAccount, function(index, account) {
               if (account.getAttribute('href').endsWith('myaccount/')) {
-                account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('user')).email.replace('@avenuecode.com', ''));
+                account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('uniuser')).email.replace('@avenuecode.com', ''));
                 account.style.display = 'block';
               }
             });
@@ -45,7 +45,7 @@ var nav = (function() {
                 window.location.reload();
             };
 
-            if (localStorage.getItem('user')) {
+            if (localStorage.getItem('uniuser')) {
                 logout.style.visibility = 'visible';
             } else {
                 logout.style.visibility = 'hidden';

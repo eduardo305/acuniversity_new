@@ -16,6 +16,11 @@ angular.module('myApp.home', ['ngRoute'])
     $('.button-collapse').sideNav('hide');
   });
 
+  // Temporarily hack used to kick out all previous user session
+  if (JSON.parse(localStorage.getItem('user'))) {
+    localStorage.clear();
+  }
+
   $scope.checkCourseStatus = function(course) {
     var full = true;
 
@@ -39,7 +44,7 @@ angular.module('myApp.home', ['ngRoute'])
 
     self.setMyAccountMenu = function() {
       var myAccount = document.getElementsByClassName('myAccount'),
-        user = localStorage.getItem('user');
+        user = localStorage.getItem('uniuser');
 
       if (user) {
 
@@ -51,7 +56,7 @@ angular.module('myApp.home', ['ngRoute'])
 
         $.each(myAccount, function(index, account) {
           if (account.getAttribute('href').endsWith('myaccount/')) {
-            account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('user')).email.replace('@avenuecode.com', ''));
+            account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('uniuser')).email.replace('@avenuecode.com', ''));
             account.style.display = 'block';
           }
         });
@@ -77,7 +82,7 @@ angular.module('myApp.home', ['ngRoute'])
           window.location.reload();
         };
 
-        if (localStorage.getItem('user')) {
+        if (localStorage.getItem('uniuser')) {
           logout.style.visibility = 'visible';
         } else {
           logout.style.visibility = 'hidden';

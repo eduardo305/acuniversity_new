@@ -39,7 +39,7 @@ angular.module('myApp.myaccount', ['ngRoute'])
 
     $http({
       method: 'PUT',
-      url: apidomain + 'api/quit/' + JSON.parse(localStorage.getItem('user')).email.replace('@avenuecode.com', ''),
+      url: apidomain + 'api/quit/' + JSON.parse(localStorage.getItem('uniuser')).email.replace('@avenuecode.com', ''),
       data: {'classrooms': classroomsid },
       headers: {'x-access-token': window.localStorage.getItem('token')},
     }).success(function(data) {

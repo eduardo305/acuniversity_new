@@ -46,7 +46,7 @@ angular.module('myApp.comment', ['ngRoute'])
     $scope.comments = response.data;
     $('textarea#commentarea').characterCounter();
 
-    if (!window.localStorage.getItem('user') && !window.localStorage.getItem('token')) {
+    if (!window.localStorage.getItem('uniuser') && !window.localStorage.getItem('token')) {
       $('#formcontent').remove();
     }
   });

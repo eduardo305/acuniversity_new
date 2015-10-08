@@ -58,7 +58,7 @@ angular.module('myApp.course', ['ngRoute'])
 
     return $http({
       method: 'PUT',
-      url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('user')).email.replace('@avenuecode.com', ''),
+      url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('uniuser')).email.replace('@avenuecode.com', ''),
       data: {'classrooms': classroomsid},
       headers: {'x-access-token': window.localStorage.getItem('token')},
     }).success(function(data) {
@@ -94,7 +94,7 @@ angular.module('myApp.course', ['ngRoute'])
     $scope.currentClass = classroomsid;
     $scope.currentClassParticipantNumber = 0;
 
-    if (JSON.parse(localStorage.getItem('user'))) {
+    if (JSON.parse(localStorage.getItem('uniuser'))) {
       CourseService.getClassroomStudents(classroomsid).then(function(response) {
         $scope.participantNumber = response.data ? response.data.length : 0;
 

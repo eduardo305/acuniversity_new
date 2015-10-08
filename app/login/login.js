@@ -41,7 +41,7 @@ angular.module('myApp.login', ['ngRoute'])
       
       if (data.success) {
         window.localStorage.setItem('token', data.token);
-        window.localStorage.setItem('user', JSON.stringify(data.user));
+        window.localStorage.setItem('uniuser', JSON.stringify(data.user));
         window.location.href = '#/view1';
       } else {
         alertify.alert('Invalid user...');
