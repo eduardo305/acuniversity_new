@@ -1,7 +1,7 @@
 <div class="row">
-	<form class="col s12" ng-submit="addComment()">
+	<form id="commentsform" class="col s12" ng-submit="addComment()">
 		<h4>{{comments.length}} Comments</h4>
-		<div class="row">
+		<div id="formcontent" class="row">
 		  <div class="input-field col s12">
 		  	
 		    <textarea id="commentarea" class="materialize-textarea" length="360" ng-model="comment.text" placeholder="write your comment here"></textarea>

@@ -51,7 +51,7 @@ angular.module('myApp.home', ['ngRoute'])
 
         $.each(myAccount, function(index, account) {
           if (account.getAttribute('href').endsWith('myaccount/')) {
-            account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('user'))._id);
+            account.setAttribute('href',  account.href + JSON.parse(localStorage.getItem('user')).email.replace('@avenuecode.com', ''));
             account.style.display = 'block';
           }
         });

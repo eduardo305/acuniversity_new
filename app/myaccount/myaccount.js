@@ -16,7 +16,7 @@ angular.module('myApp.myaccount', ['ngRoute'])
     url: apidomain + 'api/users/' + $routeParams.userid,
     headers: {'x-access-token': window.localStorage.getItem('token')},
   }).success(function(data) {
-    $scope.user = data[0];
+    $scope.user = data.user[0];
 
     // Hide sideNav
     $('.button-collapse').sideNav('hide');
@@ -39,7 +39,7 @@ angular.module('myApp.myaccount', ['ngRoute'])
 
     $http({
       method: 'PUT',
-      url: apidomain + 'api/quit/' + JSON.parse(localStorage.getItem('user'))._id,
+      url: apidomain + 'api/quit/' + JSON.parse(localStorage.getItem('user')).email.replace('@avenuecode.com', ''),
       data: {'classrooms': classroomsid },
       headers: {'x-access-token': window.localStorage.getItem('token')},
     }).success(function(data) {

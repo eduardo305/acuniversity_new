@@ -58,7 +58,7 @@ angular.module('myApp.course', ['ngRoute'])
 
     return $http({
       method: 'PUT',
-      url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('user'))._id,
+      url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('user')).email.replace('@avenuecode.com', ''),
       data: {'classrooms': classroomsid},
       headers: {'x-access-token': window.localStorage.getItem('token')},
     }).success(function(data) {
@@ -94,30 +94,34 @@ angular.module('myApp.course', ['ngRoute'])
     $scope.currentClass = classroomsid;
     $scope.currentClassParticipantNumber = 0;
 
-    CourseService.getClassroomStudents(classroomsid).then(function(response) {
-      $scope.participantNumber = response.data ? response.data.length : 0;
+    if (JSON.parse(localStorage.getItem('user'))) {
+      CourseService.getClassroomStudents(classroomsid).then(function(response) {
+        $scope.participantNumber = response.data ? response.data.length : 0;
 
-      var classroom = $scope.findClassroom(classroomsid);
+        var classroom = $scope.findClassroom(classroomsid);
 
-      if ($scope.participantNumber < classroom[0].limit) {
-        CourseService.register(classroomsid).then(function(response) {
-          if (response.data.success) {
-            $scope.participantNumber++;
+        if ($scope.participantNumber < classroom[0].limit) {
+          CourseService.register(classroomsid).then(function(response) {
+            if (response.data.success) {
+              $scope.participantNumber++;
 
-            if ($scope.isFull(classroomsid)) {
-              $scope.setClassroomAvailability(classroomsid);
+              if ($scope.isFull(classroomsid)) {
+                $scope.setClassroomAvailability(classroomsid);
+              }
+
+              alertify.success('You are now registered', 1000);
+            } else {
+              alertify.error(response.data.message, 3000);
             }
-
-            alertify.success('You are now registered', 1000);
-          } else {
-            alertify.error(response.data.message, 3000);
-          }
-          
-        });
-      } else {
-        alertify.alert('This classroom is already full');
-      }
-    });
+            
+          });
+        } else {
+          alertify.alert('This classroom is already full');
+        }
+      });
+    } else {
+      window.location.href = '#/login';
+    }
   };
 
   $scope.setClassroomAvailability = function(classroomsid) {

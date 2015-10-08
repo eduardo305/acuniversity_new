@@ -20,6 +20,7 @@ angular.module('myApp.comment', ['ngRoute'])
     }).success(function(data) {
       //return data;
     }).error(function(data) {
+      $('.progress').toggleClass('hide');
       console.log('Error: ' + data);
     });
   };
@@ -44,6 +45,10 @@ angular.module('myApp.comment', ['ngRoute'])
     $('.progress').toggleClass('hide');
     $scope.comments = response.data;
     $('textarea#commentarea').characterCounter();
+
+    if (!window.localStorage.getItem('user') && !window.localStorage.getItem('token')) {
+      $('#formcontent').remove();
+    }
   });
 
   $scope.addComment = function() {
@@ -56,7 +61,6 @@ angular.module('myApp.comment', ['ngRoute'])
           $('textarea').val('');
         });
       } else {
-        $('textarea').val('');
         $('textarea').focus();
         alertify.alert('Your comment is too big, dude!');
       }
