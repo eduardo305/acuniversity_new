@@ -72,7 +72,7 @@ angular.module('myApp.login', ['ngRoute'])
     if (validUser(user)) {
       $http({
         method: 'POST',
-        url: apidomain + 'setup/',
+        url: apidomain + 'api/setup/',
         data: user,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         transformRequest: function(obj) {
@@ -89,6 +89,36 @@ angular.module('myApp.login', ['ngRoute'])
       });
     } else {
       alertify.alert('One of the inputs are empty or you forgot to add the @avenuecode.com to your e-mail! Please, try it once again...');
+    }
+  };
+
+  $scope.openModal = function() {
+    $('#remembermeModal').openModal();
+  };
+
+  $scope.rememberme = function(email) {
+    var email = $('#rememberemail').val();
+
+    if (email && email.length > 0) {
+      $http({
+        method: 'POST',
+        url: apidomain + 'api/rememberme',
+        data: {email: email},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        transformRequest: function(obj) {
+          var str = [];
+          for(var p in obj)
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          return str.join("&");
+        }
+      }).success(function(data) {
+        alertify.alert('Your password was sent. Please check your email. If you don\'t see it, please check your spam box');
+
+      }).error(function(data) {
+        alertify.alert('Something went wrong. Please try again later...');
+      });
+    } else {
+      alertify.alert('Please enter one valid email...');
     }
   };
 

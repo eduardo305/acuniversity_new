@@ -53,6 +53,12 @@
                 <!-- <a href="index.html" class="btn waves-effect waves-light col s12">Login</a> -->
             </div>
         </div>
+
+        <div class="row">
+            <div class="col s12">
+                <a ng-click="openModal()" class="waves-effect waves-light modal-trigger">Forgot my password...</a>
+            </div>
+        </div>
         <!-- <div class="row">
             <div class="input-field col s6 m6 l6">
                 <p class="margin medium-small"><a href="page-register.html">Register Now!</a></p>
@@ -62,6 +68,26 @@
             </div>
         </div> -->
     </form>
+</div>
+
+<!-- Modal Structure -->
+<div id="remembermeModal" class="modal modal-fixed-footer">
+    <div class="modal-content center-align">
+      <h5>What is your Avenue Code email</h5>
+
+      <form ng-submit="rememberme()" novalidate>
+        <div class="input-field col s12">
+            <i class="mdi-social-person-outline prefix"></i>
+            <input id="rememberemail" type="email" ng-model="rememberme.email">
+            <label for="rememberemail" class="center-align">Avenue Code Email</label>
+            <input type="submit" value="submit" class="modal-action modal-close btn black waves-effect waves-light">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <!-- <a ng-click="rememberme()" ng-model="rememberme.email" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a> -->
+      <!-- <input type="submit" value="submit" class="modal-action modal-close waves-effect waves-green btn-flat"> -->
+    </div>
 </div>
 
 <div class="col s12 m6">
