@@ -1,43 +1,25 @@
 <div class="row">
-	<form id="commentsform" class="col s12" ng-submit="addComment()">
-		<h4>{{comments.length}} Comments</h4>
-		<div id="formcontent" class="row">
-		  <div class="input-field col s12">
-		  	
-		    <textarea id="commentarea" class="materialize-textarea" length="360" ng-model="comment.text" placeholder="write your comment here"></textarea>
-		    <!-- <label for="commentarea">Comment</label> -->
-		    <!-- <input type="submit" value="Submit" class="button" /> -->
-		    <button class="btn waves-effect waves-light black" type="submit" name="action">Submit</button>
-		  </div>
-		</div>
-	</form>
+    <form id="commentsform" class="col s12" ng-submit="addComment()">
+        <h4>{{comments.length}} Comments</h4>
+        <div id="formcontent" class="row">
+            <div class="input-field col s12">
+                <textarea id="commentarea" class="materialize-textarea" length="360" ng-model="comment.text" placeholder="write your comment here"></textarea>
+                <button class="btn waves-effect waves-light black" type="submit" name="action">Submit</button>
+            </div>
+        </div>
+    </form>
 </div>
-
-<!-- <div class="preloader-wrapper small active center-align">
-	<div class="spinner-layer spinner-red-only">
-	  <div class="circle-clipper left">
-	    <div class="circle"></div>
-	  </div><div class="gap-patch">
-	    <div class="circle"></div>
-	  </div><div class="circle-clipper right">
-	    <div class="circle"></div>
-	  </div>
-	</div>
-</div> -->
 <div class="progress">
-	<div class="indeterminate"></div>
+    <div class="indeterminate"></div>
 </div>
-
 <ul class="collection comments">
     <li class="collection-item avatar" ng-repeat="comment in comments">
-      <!-- <img src="images/yuna.jpg" alt="" class="circle"> -->
-      <i class="material-icons circle red">assignment_ind</i>
-      <!-- <span class="title">Title</span> -->
-      <p class="grey-text"><i class="fa fa-calendar"></i> <time datetime="2014-10-18">{{comment.date | date: 'medium'}} </time> <br>
-         <p>{{comment.comment}}</p>
-      </p>
-      <!-- <a href="" class="secondary-content"><i class="material-icons">grade</i></a> -->
+        <i class="material-icons circle red" ng-if="!comment.user.google">assignment_ind</i>
+        <img ng-src="{{comment.user.google.picture}}" alt="" class="circle" ng-if="comment.user.google.picture">
+        <p class="grey-text"><i class="fa fa-calendar"></i>
+            <time datetime="2014-10-18">{{comment.date | date: 'medium'}} </time>
+            <br>
+            <p>{{comment.comment}}</p>
+        </p>
     </li>
 </ul>
-
-<!-- <link rel="stylesheet" href="/app/comment/comment.css"> -->

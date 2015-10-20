@@ -14,8 +14,7 @@ angular.module('myApp.course', ['ngRoute'])
   this.list = function() {
     return $http({
       method: 'GET',
-      url: apidomain + 'api/courses',
-      headers: {'x-access-token': window.localStorage.getItem('token')},
+      url: 'api/courses'
     }).success(function(data) {
       if (data.success) {
         return data.courses;
@@ -30,8 +29,7 @@ angular.module('myApp.course', ['ngRoute'])
   this.getCourse = function(courseid) {
     return $http({
       method: 'GET',
-      url: apidomain + 'api/courses/' + courseid,
-      headers: {'x-access-token': window.localStorage.getItem('token')},
+      url: 'api/courses/' + courseid
     }).success(function(data) {
       if (!data.success) {
         window.location.href = '#/login';
@@ -45,8 +43,7 @@ angular.module('myApp.course', ['ngRoute'])
 
     return $http({
       method: 'GET',
-      url: apidomain + 'api/students/' + classroomsid,
-      headers: {'x-access-token': window.localStorage.getItem('token')},
+      url: 'api/students/' + classroomsid
     }).success(function(data) {
       //return data;
     }).error(function(data) {
@@ -59,8 +56,7 @@ angular.module('myApp.course', ['ngRoute'])
     return $http({
       method: 'PUT',
       url: apidomain + 'api/register/' + JSON.parse(localStorage.getItem('uniuser')).email.replace('@avenuecode.com', ''),
-      data: {'classrooms': classroomsid},
-      headers: {'x-access-token': window.localStorage.getItem('token')},
+      data: {'classrooms': classroomsid}
     }).success(function(data) {
        
     }).error(function(data) {
@@ -71,9 +67,8 @@ angular.module('myApp.course', ['ngRoute'])
   this.setClassroomAvailability = function(classroomsid, isFull) {
     return $http({
       method: 'PUT',
-      url: apidomain + 'api/classrooms/availability/' + classroomsid,
-      data: { 'isFull' : isFull },
-      headers: {'x-access-token': window.localStorage.getItem('token')},
+      url: 'api/classrooms/availability/' + classroomsid,
+      data: { 'isFull' : isFull }
     }).success(function(data) {
       
     }).error(function(data) {
@@ -120,6 +115,7 @@ angular.module('myApp.course', ['ngRoute'])
         }
       });
     } else {
+      alertify.error('Please login so you can register to your course', 3000);
       window.location.href = '#/login';
     }
   };

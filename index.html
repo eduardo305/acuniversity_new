@@ -24,23 +24,10 @@
 
 </head>
 <body>
-  <!-- <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul> -->
-  <!-- <header class="medium-6 medium-centered columns text-center">
-    <div>
-      <h1>AC Trainings</h1>
-    </div>
-    <ul class="inline-list inline-list small-10 medium-6 small-centered columns text-center">
-      <li><a href="#/view1">home</a></li>
-      <li><a id="myAccount" href="#/view3/">my account</a></li>
-      <li><a id="logout">logout</a></li>
-    </ul>
-    
-  </header> -->
 
-  <div ng-include="'app/nav/nav.html'"></div>
+  <div ng-controller="NavCtrl">
+    <div ng-include="'app/nav/nav.html'"></div>
+  </div>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -62,45 +49,13 @@
   <script src="app/app.js"></script>
   <script src="app/home/home.js"></script>
   <script src="app/course/course.js"></script>
-  <script src="app/myaccount/myaccount.js"></script>
+  <script src="app/profile/profile.js"></script>
   <script src="app/login/login.js"></script>
   <script src="app/comment/comment.js"></script>
+  <script src="app/nav/nav.js"></script>
   <script src="app/module/module.js"></script>
   <script src="app/components/version/version.js"></script>
   <script src="app/components/version/version-directive.js"></script>
   <script src="app/components/version/interpolate-filter.js"></script>
-  <script>
-    /*(function() {
-      var myAccount = document.getElementById('myAccount');
-      if (myAccount) {
-        if (localStorage.getItem('user')) {
-          myAccount.setAttribute('href',  myAccount.href + JSON.parse(localStorage.getItem('user'))._id);
-        } else {
-          myAccount.style.display = 'none';
-        }
-      }
-      
-      var logout = document.getElementById('logout');
-      if (logout) {
-        logout.onclick = function() {
-          localStorage.clear();
-          window.location.href = '#/login';
-          window.location.reload();
-        };
-
-        if (localStorage.getItem('user')) {
-          logout.style.visibility = 'visible';
-        } else {
-          logout.style.visibility = 'hidden';
-        }
-      }
-      
-
-
-    })();*/
-    
-    //$(".button-collapse").sideNav();
-    
-  </script>
 </body>
 </html>

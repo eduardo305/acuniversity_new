@@ -15,8 +15,7 @@ angular.module('myApp.comment', ['ngRoute'])
 
     return $http({
       method: 'GET',
-      url: apidomain + 'api/comments/' + courseid,
-      headers: {'x-access-token': window.localStorage.getItem('token')},
+      url: 'api/comments/' + courseid
     }).success(function(data) {
       //return data;
     }).error(function(data) {
@@ -28,9 +27,8 @@ angular.module('myApp.comment', ['ngRoute'])
   this.addComment = function(comment, courseid) {
     return $http({
       method: 'POST',
-      url: apidomain + 'api/comments/' + courseid,
-      data: {'user': JSON.parse(localStorage.getItem('user'))._id, 'comment': comment},
-      headers: {'x-access-token': window.localStorage.getItem('token')},
+      url: 'api/comments/' + courseid,
+      data: {'user': JSON.parse(localStorage.getItem('uniuser'))._id, 'comment': comment}
     }).success(function(data) {
        
     }).error(function(data) {
@@ -46,7 +44,7 @@ angular.module('myApp.comment', ['ngRoute'])
     $scope.comments = response.data;
     $('textarea#commentarea').characterCounter();
 
-    if (!window.localStorage.getItem('uniuser') && !window.localStorage.getItem('token')) {
+    if (JSON.parse(window.localStorage.getItem('isLoggedIn')) === false) {
       $('#formcontent').remove();
     }
   });
