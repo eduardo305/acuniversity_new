@@ -44,13 +44,14 @@ app.use(passport.session());
 // routes ================
 // =======================
 console.log(__dirname);
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, '/public' )));
 
 // route for home page
 app.get('/', function(req, res) {
-    //res.sendFile('index.html', { root: path.join(__dirname, '../../') })
-    console.log(req.user);
-    res.send(req.user);
+  console.log("test");
+    res.sendFile('./index.html', { root: path.join(__dirname, './') });
+    // console.log(req.user);
+    // res.send(req.user);
 });
 
 // route for login form
@@ -95,7 +96,7 @@ require('./server/app/routes/commentRoutes.js')(app, Course, Comment);
 
 app.use(function(req, res) {
   console.error(req.stack);
-  res.send('404: Page not Found', 404);
+  res.status(404).send('404: Page not Found');
 });
 
 // Handle 500
