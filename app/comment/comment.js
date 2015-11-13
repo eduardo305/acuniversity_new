@@ -29,7 +29,7 @@ angular.module('myApp.comment', ['ngRoute'])
     return $http({
       method: 'POST',
       url: apidomain + 'api/comments/' + courseid,
-      data: {'user': JSON.parse(localStorage.getItem('user'))._id, 'comment': comment},
+      data: {'user': JSON.parse(localStorage.getItem('uniuser'))._id, 'comment': comment},
       headers: {'x-access-token': window.localStorage.getItem('token')},
     }).success(function(data) {
        
